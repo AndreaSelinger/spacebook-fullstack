@@ -2,8 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/spacebookDB', function() {
-  console.log("DB connection established!!!");
+mongoose.connect( process.env.MONGOLAB_URI || 'mongodb://localhost/spacebookDB', function() {
+  console.log("DB connection established!!!"+ process.env.MONGOLAB_URI );
 })
 
 var Post = require('./models/postModel');
@@ -81,9 +81,7 @@ app.post('/posts/:comment', function (req, res) {
   
 });
 
-
-
-
+ 
 app.listen( process.env.PORT || '8080',function () {
-  console.log('Port is good'); 
+  console.log('Port is good'+ process.env.PORT); 
 } );
